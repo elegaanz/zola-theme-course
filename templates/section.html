@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% set index = get_section(path="_index.md") %}
+{% set next_page = section.pages | first %}
+{% set next_link = next_page.permalink %}
+
+{% set found_current = false %}
+{% for s in index.subsections | reverse %}
+    {% set subsection = get_section(path=s) %}
+    {% if found_current %}
+        {% set previous_page = subsection.pages | last %}
+        {% set_global previous_link = previous_page.permalink %}
+    {% endif %}
+    {% set_global found_current = section.permalink == subsection.permalink %}
+{% endfor %}
+
+{{ section.content | safe }}
+
+<ol class="toc">
+{% for chap in section.pages %}
+    <li>
+        <a href="{{ chap.permalink }}">{{ chap.title }}</a>
+        <p>{{ chap.description }}</p>
+    </li>
+{% endfor %}
+</ol>
+
+{% if previous_link or next_link %}
+    <nav>
+        {% if previous_link %}
+            <a href="{{ previous_link }}">⇦ Page précédente</a>
+        {% endif %}
+        
+        {% if next_link %}
+            <a href="{{ next_link }}">Page suivante ⇨</a>
+        {% endif %}
+    </nav>
+{% endif %}
+
+{% endblock content %}
+

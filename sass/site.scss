@@ -1,0 +1,215 @@
+* {
+    --white: #F6F7EB;
+    --black: #060606;
+}
+
+$primary: var(--primary); // yes that's not blue at all
+$accent: var(--accent);
+
+@media (prefers-color-scheme: dark) {
+    * {
+        --foreground: var(--white);
+        --background: var(--black);
+    }
+
+    body.light,
+    body.light * {
+        --foreground: var(--black);
+        --background: var(--white);
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    * {
+        --foreground: var(--black);
+        --background: var(--white);
+    }
+
+    body.dark,
+    body.dark * {
+        --foreground: var(--white);
+        --background: var(--black);
+    }
+}
+
+$background: var(--background);
+$foreground: var(--foreground);
+
+.theme-switch {
+    position: fixed;
+    bottom: 1em;
+    left: 1em;
+    background: var(--foreground);
+    color: var(--background);
+    display: block;
+    padding: 0.5em;
+}
+
+html,
+body {
+    margin: 0px;
+    padding: 0px;
+    font-family: sans-serif;
+    background: var(--background);
+    color: var(--foreground);
+}
+
+body>* {
+    padding-left: 20vw;
+    padding-right: 20vw;
+}
+
+a,
+a:visited {
+    color: $primary;
+    text-decoration: none;
+}
+
+header {
+    background: $accent;
+    color: var(--white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    a,
+    a:visited {
+        color: var(--white);
+    }
+}
+
+.illus {
+    min-height: 30vh;
+    background-position: center;
+    background-size: cover;
+}
+
+main {
+    min-height: 80vh;
+    padding: 5em 20vw;
+}
+
+footer {
+    min-height: 20vh;
+    background: $accent;
+    padding: 5em 20vw;
+    text-align: center;
+    color: var(--white);
+
+    a,
+    a:visited {
+        color: var(--white);
+        text-decoration: underline;
+    }
+}
+
+main>nav {
+    display: flex;
+
+    a {
+        display: block;
+        padding: 1em;
+        flex: 1;
+        transition: background 0.1s ease-in;
+
+        &:hover {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        &:last-of-type {
+            text-align: right;
+        }
+    }
+}
+
+pre {
+    padding: 1em;
+    overflow-x: auto;
+}
+
+*:not(pre)>code {
+    background: transparentize(#000, 0.90);
+    padding: 0.2em 0.4em;
+}
+
+table {
+    margin: 2em auto;
+    border-collapse: collapse;
+}
+
+td,
+th:not(:empty) {
+    padding: 1em;
+    border: 1px solid $accent;
+}
+
+.toc {
+    list-style-type: upper-roman;
+    font-size: 1.5em;
+
+    li {
+        padding: 0.5em;
+
+        &>p {
+            font-size: 0.75em;
+        }
+    }
+}
+
+ol {
+    padding-left: 1em;
+}
+
+main img {
+    display: block;
+    margin: 2em auto;
+    max-height: 50vh;
+    max-width: 90vw;
+}
+
+@media screen and (max-width: 720px) {
+    body>* {
+        padding-left: 5vw;
+        padding-right: 5vw;
+    }
+
+    main {
+        padding: 1em 5vw;
+    }
+}
+
+summary {
+    cursor: pointer;
+}
+
+.quizz {
+    border-left: 3px solid $accent;
+    padding-left: 2em;
+    margin: 0px 0px 3em;
+
+    pre {
+        margin-bottom: 0px
+    }
+
+    input {
+        border: 1px solid $accent;
+        margin: 0px 0px 1em;
+        padding: 0.5em;
+        width: calc(100% - 1em - 2px);
+
+        &.code {
+            font-family: monospace;
+        }
+
+        &:valid {
+            border-color: green;
+            background: transparentize(green, 0.8);
+        }
+
+        &:invalid {
+            outline: none;
+            border-color: red;
+            background: transparentize(red, 0.8);
+        }
+    }
+}

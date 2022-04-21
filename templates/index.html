@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p>{{ section.description }}</p>
+
+{{ section.content | safe }}
+
+<ol class="toc">
+{% for part in section.subsections %}
+    {% set part = get_section(path=part) %}
+    <li><a href="{{ part.permalink }}">{{ part.title }}</a>
+        <ol>
+        {% for chap in part.pages %}
+            <li><a href="{{ chap.permalink }}">{{ chap.title }}</a></li>
+        {% endfor %}
+        </ol>
+    </li>
+{% endfor %}
+</ol>
+
+{% endblock content %}
+

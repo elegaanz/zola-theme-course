@@ -1,0 +1,23 @@
+# The URL the site will be built for
+base_url = "https://example.com"
+
+# Whether to automatically compile all Sass files in the sass directory
+compile_sass = true
+
+# Whether to build a search index to be used later on by a JavaScript library
+build_search_index = false
+
+[markdown]
+# Whether to do syntax highlighting
+# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
+highlight_code = true
+
+[extra]
+site_name = "Demo course"
+icon = "https://www.getzola.org/favicon.ico"
+icon_desc = "The Zola logo : a white Z on a black square"
+description = "This is a demo course to showcase the theme"
+default_illus = "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=1770&q=80"
+primary_color = "#2686d1"
+accent_color = "#9b68bc"
+source_url = "https://github.com/me/my-course"

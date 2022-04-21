@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+{# borrowed from https://github.com/getzola/book/ #}
+{% set index = get_section(path="_index.md") %}
+{% set section = get_section(path=page.ancestors | last) %}
+{% if page.lighter %}
+    {% set_global previous_link = page.lighter.permalink %}
+{% else %}
+    {% set_global previous_link = section.permalink %}
+{% endif %}
+
+{% if page.heavier %}
+    {% set_global next_link = page.heavier.permalink %}
+{% else %}
+    {% set found_current = false %}
+    {% for s in index.subsections %}
+        {% set subsection = get_section(path=s) %}
+        {% if found_current %}
+            {% set_global next_link = subsection.permalink %}
+            {# no break #}
+            {% set_global found_current = false %}
+        {% endif %}
+        {% for p in subsection.pages %}
+            {% if p.permalink == page.permalink %}
+                {% set_global found_current = true %}
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+{% endif %}
+{{ page.content | safe }}
+
+{% if previous_link or next_link %}
+    <nav>
+        {% if previous_link %}
+            <a href="{{ previous_link }}">⇦ Page précédente</a>
+        {% endif %}
+        
+        {% if next_link %}
+            <a href="{{ next_link }}">Page suivante ⇨</a>
+        {% endif %}
+    </nav>
+{% endif %}
+
+{% endblock content %}
+

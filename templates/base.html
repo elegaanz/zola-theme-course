@@ -1,0 +1,98 @@
+{% set p = section | default(value=page) %}
+{% set title = p.title | default(value="Page inconnue") %}
+{% set description = p.description | default(value="") %}
+{% if p.extra.illus %}
+{% set illus = current_url ~ p.extra.illus %}
+{% endif %}
+{% set full_title = title ~ " ⋅ " ~ config.extra.site_name %}
+<!DOCTYPE HTML>
+<html lang="fr" prefix="og: http://ogp.me/ns#">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="{{ description }}" />
+  <link rel="icon" type="image/svg+xml" href="{{ config.extra.icon }}" />
+  <meta property="og:title" content="{{ full_title }}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:site_name" content="{{ config.extra.site_name }}" />
+  <meta property="og:url" content="{{ current_url }}" />
+  <meta property="og:description" content="{{ description }}" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="{{ full_title }}" />
+  <meta name="twitter:description" content="{{ description }}" />
+  <meta name="twitter:url" content="{{ current_url }}" />
+  <meta name="twitter:card" content="summary" />
+  {% if illus %}
+  <meta property="og:image" content="{{ illus }}" />
+  <meta name="twitter:image" content="{{ illus }}" />
+  {% else %}
+  {% set default_illus = config.extra.default_illus %}
+  <meta property="og:image" content="{{ get_url(path=default_illus) }}" />
+  <meta name="twitter:image" content="{{ get_url(path=default_illus) }}" />
+  {% endif %}
+  <title>{{ full_title }}</title>
+  <link rel="stylesheet" href="/site.css" media="all">
+  {% if p.extra.jsonld %}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "{{ config.extra.site_name }}",
+      "description": "{{ config.extra.description }}",
+      "provider": {
+        "@type": "Person",
+        "name": "Baptiste Gelez",
+        "sameAs": "https://baptiste.gelez.xyz"
+      }
+    }
+    </script>
+  {% endif %}
+  <style>
+    * {
+      --primary: {{ config.extra.primary_color }};
+
+      --accent: {{ config.extra.accent_color }};
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1><a href="/">{{ config.extra.site_name }}</a></h1>
+    <img src="{{ config.extra.icon }}" alt="{{ config.extra.icon_desc }}" style="border: none; width: 50px;" />
+  </header>
+  {% if illus %}
+  <section class="illus" style="background-image: url('{{ illus }}')"></section>
+  {% endif %}
+  <main>
+    {% if not p.extra.no_title %}
+    {% for anc in p.ancestors %}
+    {% set anc = get_section(path=anc) %}
+    {% if loop.index != 1 %}&mdash;{% endif %}
+    <a href="{{ anc.permalink }}">{{ anc.title }}</a>
+    {% endfor %}
+    <h1>{{ title }}</h1>
+    {% endif %}
+    {% block content %}{% endblock content %}
+    <!-- <% if current_page.data.prev || current_page.data.next %>
+        <nav>
+          <% if current_page.data.prev %>
+            <a href="/<%= current_page.data.prev %>">⇦ Page précédente</a>
+          <% end%>
+          <% if current_page.data.next %>
+            <a href="/<%= current_page.data.next %>">Page suivante ⇨</a>
+          <% end%>
+        </nav>
+        <% end %> -->
+  </main>
+  <footer>
+    <p>Ce cours est <a href="{{ config.extra.source_url }}">modifiable par tous</a>.</p>
+    <p>Il est sous licence GPLv3.0.</p>
+  </footer>
+  <script src="/theme.js"></script>
+</body>
+
+</html>

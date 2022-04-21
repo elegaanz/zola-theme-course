@@ -1,0 +1,27 @@
+name = "Course"
+description = "A zola theme designed for online courses or tutorials"
+license = "GPL-3.0"
+homepage = "https://github.com/elegaanz/zola-theme-course"
+# The minimum version of Zola required
+min_version = "0.15.0"
+# An optional live demo URL
+demo = "https://c.gelez.xyz"
+
+# Any variable there can be overridden in the end user `config.toml`
+# You don't need to prefix variables by the theme name but as this will
+# be merged with user data, some kind of prefix or nesting is preferable
+# Use snake_casing to be consistent with the rest of Zola
+[extra]
+site_name = "My course"
+icon = ""
+icon_desc = "Icon of the course"
+description = "…"
+default_illus = ""
+primary_color = "#6A91D4"
+accent_color = "#4DAA57"
+source_url = "https://github.com/me/my-course"
+
+# The theme author info: you!
+[author]
+name = "Ana Gelez"
+homepage = "https://ana.gelez.xyz"
