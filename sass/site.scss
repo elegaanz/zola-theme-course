@@ -228,3 +228,23 @@ blockquote {
     margin: 1em 0em;
     padding: 0.2em 1.5em;
 }
+
+.footnote-definition {
+    margin: 3em;
+}
+
+.footnote-definition-label {
+    float: left;
+    padding: 1em;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: 5em;
+    width: 2em;
+    height: 2em;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    margin-right: 1em;
+}
