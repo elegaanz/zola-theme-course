@@ -34,7 +34,7 @@
   <meta name="twitter:image" content="{{ get_url(path=default_illus) }}" />
   {% endif %}
   <title>{{ full_title }}</title>
-  <link rel="stylesheet" href="/site.css" media="all">
+  <link rel="stylesheet" href="{{ get_url(path='site.css', trailing_slash=false, cachebust=true) | safe }}" media="all" />
   {% if p.extra.jsonld %}
   <script type="application/ld+json">
     {
@@ -92,7 +92,7 @@
     <p>Ce cours est <a href="{{ config.extra.source_url }}">modifiable par tous</a>.</p>
     <p>Il est sous licence GPLv3.0.</p>
   </footer>
-  <script src="/theme.js"></script>
+  <script src="{{ get_url(path='theme.js', trailing_slash=false) | safe }}" integrity="sha384-{{ get_hash(path='theme.js', sha_type=384, base64=true) | safe }}"></script>
 </body>
 
 </html>

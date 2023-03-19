@@ -7,10 +7,10 @@
 <ol class="toc">
     {% for part in section.subsections %}
     {% set part = get_section(path=part) %}
-    <li><a href="{{ part.permalink }}">{{ part.title }}</a>
+    <li><a href="{{ part.permalink | safe }}">{{ part.title }}</a>
         <ol>
             {% for chap in part.pages %}
-            <li><a href="{{ chap.permalink }}">{{ chap.title }}</a></li>
+            <li><a href="{{ chap.permalink | safe }}">{{ chap.title }}</a></li>
             {% endfor %}
         </ol>
     </li>
