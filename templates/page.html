@@ -33,11 +33,11 @@
 {% if previous_link or next_link %}
     <nav>
         {% if previous_link %}
-            <a href="{{ previous_link }}">⇦ Page précédente</a>
+            <a href="{{ previous_link | safe }}">⇦ Page précédente</a>
         {% endif %}
         
         {% if next_link %}
-            <a href="{{ next_link }}">Page suivante ⇨</a>
+            <a href="{{ next_link | safe }}">Page suivante ⇨</a>
         {% endif %}
     </nav>
 {% endif %}

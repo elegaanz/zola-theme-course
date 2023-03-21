@@ -3,9 +3,9 @@ description = "A zola theme designed for online courses or tutorials"
 license = "GPL-3.0"
 homepage = "https://github.com/elegaanz/zola-theme-course"
 # The minimum version of Zola required
-min_version = "0.15.0"
+min_version = "0.17.1"
 # An optional live demo URL
-demo = "https://c.gelez.xyz"
+demo = "https://c.gelez.xyz/"
 
 # Any variable there can be overridden in the end user `config.toml`
 # You don't need to prefix variables by the theme name but as this will
